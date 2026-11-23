@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Karyawan {
+  nip             String  @id @db.VarChar(255)
+  nama            String  @db.VarChar(100)
+  email           String? @db.VarChar(100)
+  bagian          String? @db.VarChar(100)
+  password        String? @db.VarChar(255)
+  isAdmin Boolean @default(false) @map("is_admin")
+  emailPassword   String? @map("email_password") @db.VarChar(255)
+
+  emailTickets EmailTicket[]
+  zoomTickets  ZoomTicket[]
+
+  @@map("karyawan")
+}
+
+model EmailTicket {
+  id        Int      @id @default(autoincrement())
+  status    String   @default("PENDING") @db.VarChar(25)
+  request   String   @db.VarChar(25)
+  nip       String   @db.VarChar
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  karyawan Karyawan @relation(fields: [nip], references: [nip], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([nip], map: "idx_email_ticket_nip")
+  @@map("email_ticket")
+}
+
+model ZoomTicket {
+  id            Int      @id @default(autoincrement())
+  description   String   @db.VarChar(255)
+  date          DateTime @db.Timestamp(3)
+  nip           String   @db.VarChar
+  status        String   @default("PENDING") @db.VarChar(25)
+  zoomLink      String?  @map("zoom_link")
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  linkSurat     String?  @map("link_surat") @db.VarChar(255)
+  alasanDitolak String?  @map("alasan_ditolak") @db.VarChar(255)
+
+  karyawan Karyawan @relation(fields: [nip], references: [nip], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([nip], map: "idx_zoom_ticket_nip")
+  @@map("zoom_ticket")
+}

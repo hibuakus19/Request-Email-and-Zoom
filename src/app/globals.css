@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-paper: #f4f6f8;
+  --color-paper-deep: #e9edf2;
+  --color-surface: #ffffff;
+  --color-ink: #182a42;
+  --color-ink-soft: #43536a;
+  --color-muted: #667085;
+  --color-line: #dce3ea;
+  --color-line-strong: #c4ceda;
+  --color-ink-hover: #22385a;
+  --color-danger-hover: #921b13;
+  --color-success-light: #4f9a7d;
+  --color-success-dark: #0b5640;
+
+  --color-accent: #1f4e79;
+  --color-accent-hover: #163b5c;
+  --color-accent-soft: #e9f1f8;
+  --color-accent-ink: #143a5c;
+  --color-accent-light: #5b86ad;
+
+  --color-success: #0f6b4f;
+  --color-success-soft: #e8f4ee;
+  --color-warning: #8a5300;
+  --color-warning-soft: #fdf3df;
+  --color-danger: #a12a20;
+  --color-danger-soft: #fbecea;
+  --color-info: #1d4ed8;
+  --color-info-soft: #e8effe;
+
+  --text-micro: 10px;
+  --text-eyebrow: 10.5px;
+  --text-badge: 11px;
+  --text-caption: 11.5px;
+  --text-small: 12px;
+  --text-label: 12.5px;
+  --text-body-sm: 13px;
+  --text-body: 13.5px;
+  --text-body-lg: 14px;
+  --text-input: 15px;
+  --text-title-xs: 15px;
+  --text-title-sm: 16px;
+  --text-title: 17px;
+  --text-title-lg: 18px;
+  --text-title-xl: 19px;
+  --text-display-sm: 1.6rem;
+  --text-display-md: 1.7rem;
+  --text-display-lg: 2rem;
+  --text-display-xl: 1.9rem;
+  --text-display: 1.65rem;
+
+  --radius-card: 1.25rem;
+  --shadow-card:
+    0 1px 2px rgba(22, 33, 59, 0.04), 0 18px 50px -32px rgba(22, 33, 59, 0.35);
+  --shadow-lift: 0 24px 55px -32px rgba(22, 33, 59, 0.45);
+  --shadow-field: 0 1px 1px rgba(22, 33, 59, 0.03);
+  --shadow-button-accent: 0 16px 30px -18px rgba(31, 78, 121, 0.55);
+  --shadow-button-ink: 0 16px 30px -18px rgba(22, 33, 59, 0.8);
+  --shadow-button-danger: 0 16px 30px -18px rgba(180, 35, 24, 0.7);
+
+  --animate-rise-in: rise-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-line);
+  }
+
+  html {
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  :where(
+    a,
+    button,
+    input,
+    textarea,
+    select,
+    summary,
+    [tabindex]
+  ):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .bg-grid-soft {
+    background-image:
+      linear-gradient(to right, rgba(22, 33, 59, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(22, 33, 59, 0.045) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

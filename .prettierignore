@@ -1,0 +1,26 @@
+# dependencies and build output
+node_modules
+.next
+out
+build
+
+# generated code
+src/generated
+
+# agent / tooling assets (not part of the app)
+.agents
+.claude
+.opencode
+.windsurf
+
+# data and docs managed separately
+prisma
+public
+docs
+design-references
+*.md
+
+# lock and generated files
+package-lock.json
+next-env.d.ts
+tsconfig.tsbuildinfo
